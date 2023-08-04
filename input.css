@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+
+/* ctrl+k  -> ctrl+shift+s */
+
+/* https://www.w3resource.com/html-css-exercise/html-css-practical-exercises/html-css-practical-exercise-15.php */
+/* .underline-animation {
+    @apply cursor-pointer relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-black after:origin-bottom-right after:[transition:_transform_0.5s_ease-out] hover:after:scale-x-100 hover:after:origin-bottom-left  ;
+} */
+/* little difference in output of  both  */
+.underline-animation {
+    @apply cursor-pointer relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-black after:origin-bottom-right after:[transition:_height_0s,transform_0.5s_ease-out] hover:after:scale-x-100 hover:after:origin-bottom-left hover:after:[transition:_height_0s_0.5s,transform_0.5s_ease-out] hover:after:h-[2px];
+}
+/* when hovering - origin->bottom-left ie transition  will start from left  AND after delay of 0.5s height becomes 2  */
+/* when not hovering - origin->bottom-right ie transtion  will behave like it  started from right  AND after no delay height is back to 1pxk */
+
+/* if u don't want height to be 2 px after certain time while hovering , then first class is enough */
+
+.tooltip-anim{
+    @apply absolute bottom-[125%]  w-32 text-xs z-[2] opacity-0 peer-hover:opacity-100  px-4 py-2 bg-black text-white text-center -ml-14 after:content-[''] after:absolute after:top-full after:left-1/2 after:-ml-[1px] after:border-4  after:border-transparent after:border-t-black transition duration-500;
+}
+
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Roboto', sans-serif;
+        
+    }
+}
+
+.button-hover-shadow{
+    @apply text-xs text-black px-8 py-4 font-semibold bg-white rounded-3xl  hover:shadow-[inset_0_-4em_0_0_rgb(168,168,168)] transition-shadow 
+}
+
+
+/* IMAGE SLIDER  */
+.anim-on-targt {
+    z-index: 4;
+    animation: slide .7s 1 ease-in-out;
+}
+
+ .anim-not-on-target {
+    animation: hidden .7s 1;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(+100%);
+    }
+
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes hidden {
+    0% {
+        z-index: 3;
+    }
+
+    100% {
+        z-index: 3;
+    }
+}
+
+
+
+
+
+/* quotes slider text animation  */
+.animate-text-up{
+    animation: upAnimate 200ms linear  1;
+}
+
+@keyframes upAnimate {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+  }
+
+
+/* quote styling in quote slider  */
+  .text-areas .text-area .text:before {
+    content: '';
+    background: url('./images/quotes.svg') 
+        no-repeat;
+    position: absolute;
+    opacity: 0.3;
+    /* top: 0px; */
+    /* left: 0px; */     
+    /* mentioned in html using tailwind */
+
+    width: 80px;
+    height: 50px   ;
+    animation: animate_before_quote 200ms linear  1;
+
+}
+
+@media (width<640px){
+    .text-areas .text-area .text:before {
+        background: url('./images/quotes_small.svg') 
+            no-repeat;
+    }
+}
+
+
+@keyframes animate_before_quote {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+
+  }
